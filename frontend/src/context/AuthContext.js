@@ -7,12 +7,25 @@ const AuthContext = createContext();
 
 export default AuthContext;
 
+function setUserObject(user) {
+  if (!user) {
+    return null;
+  }
+  return {
+    username: user.username,
+    id: user.user_id,
+    first_name: user.first_name,
+  };
+}
+
 export const AuthProvider = ({ children }) => {
   const BASE_URL = "http://127.0.0.1:8000/api/auth";
   const userToken = JSON.parse(localStorage.getItem("token"));
-  const decodedToken = userToken ? jwtDecode(userToken) : null;
+  const decodedUser = userToken ? jwtDecode(userToken) : null;
+  const userObject = setUserObject(decodedUser);
+  console.log(userObject);
   const [token, setToken] = useState(userToken);
-  const [user, setUser] = useState(decodedToken);
+  const [user, setUser] = useState(setUserObject(decodedUser));
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 
@@ -34,7 +47,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/register");
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error.toJSON());
     }
   };
 
@@ -45,18 +58,14 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", JSON.stringify(response.data.access));
         setToken(JSON.parse(localStorage.getItem("token")));
         let loggedInUser = jwtDecode(response.data.access);
-        setUser({
-          username: loggedInUser.username,
-          id: loggedInUser.user_id,
-          first_name: loggedInUser.first_name,
-        });
+        setUser(setUserObject(loggedInUser));
         setIsServerError(false);
         navigate("/");
       } else {
         navigate("/register");
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error.toJSON());
       setIsServerError(true);
       navigate("/register");
     }

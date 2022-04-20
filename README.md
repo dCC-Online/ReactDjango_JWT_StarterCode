@@ -10,7 +10,7 @@ Starter code for full stack React + Django applications using JWT for authentica
 
 - see comments in the following files in the order they are listed
   - backend/authentication/models.py
-  - backend/authentication/serializers.py (note that there are several places needing modifaction in that file)
+  - backend/authentication/serializers.py (note that there are several places needing modification in that file)
 - If modifying the User class in authentication/serializers.py, make sure to drop your existing database,
   create it, and run migrations from scratch
 - for a great reference, see the following article: https://simpleisbetterthancomplex.com/tutorial/2018/01/18/how-to-implement-multiple-user-types-with-django.html

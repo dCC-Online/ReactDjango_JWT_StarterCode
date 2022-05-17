@@ -21,7 +21,7 @@ const HomePage = () => {
         });
         setCars(response.data);
       } catch (error) {
-        console.log(error.message);
+        console.log(error.response.data);
       }
     };
     fetchCars();
@@ -32,7 +32,7 @@ const HomePage = () => {
       {cars &&
         cars.map((car) => (
           <p key={car.id}>
-            {car.year} {car.make} {car.model}
+            {car.year} {car.model} {car.make}
           </p>
         ))}
     </div>

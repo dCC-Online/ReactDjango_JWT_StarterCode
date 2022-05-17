@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/register");
       }
     } catch (error) {
-      console.log(error.toJSON());
+      console.log(error.response.data);
     }
   };
 
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/register");
       }
     } catch (error) {
-      console.log(error.toJSON());
+      console.log(error.response.data);
       setIsServerError(true);
       navigate("/register");
     }

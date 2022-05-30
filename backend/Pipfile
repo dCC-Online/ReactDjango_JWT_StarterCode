@@ -9,6 +9,7 @@ djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 mysql-connector-python = "==8.0.26"
 django-cors-headers = "*"
+tzdata = "*"
 
 [dev-packages]
 autopep8 = "*"
